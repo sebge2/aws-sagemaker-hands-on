@@ -1,6 +1,6 @@
 resource "aws_sagemaker_notebook_instance" "test" {
-  name                = "my-notebook-instance"
-  role_arn            = aws_iam_role.notebook_iam_role.arn
+  name                = var.resources_name
+  role_arn            = aws_iam_role.sm_iam_role.arn
   instance_type       = var.ec2_instance_type
   platform_identifier = var.notebook_platform
 

@@ -10,14 +10,16 @@ data "aws_iam_policy_document" "sm_assume_role_policy" {
   }
 }
 # Defining the SageMaker notebook IAM role
-resource "aws_iam_role" "notebook_iam_role" {
-  name = "sm_notebook_role"
+resource "aws_iam_role" "sm_iam_role" {
+  name = var.resources_name
   assume_role_policy = data.aws_iam_policy_document.sm_assume_role_policy.json
+
+  tags = var.tags
 }
 
 # Attaching the AWS default policy, "AmazonSageMakerFullAccess"
 resource "aws_iam_policy_attachment" "sm_full_access_attach" {
-  name = "sm-full-access-attachment"
-  roles = [aws_iam_role.notebook_iam_role.name]
+  name = var.resources_name
+  roles = [aws_iam_role.sm_iam_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
 }
