@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "resources_name" {
-  default = "sagemaker-test"
+  default = "sagemakertest"
 }
 
 variable "tags" {
