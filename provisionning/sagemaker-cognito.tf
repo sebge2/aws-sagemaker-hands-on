@@ -48,3 +48,8 @@ resource "aws_cognito_user_in_group" "jane_doe_membership" {
   group_name   = aws_cognito_user_group.test.name
   username     = aws_cognito_user.jane_doe.username
 }
+
+resource "aws_cognito_user_pool_domain" "test" {
+  domain       = aws_sagemaker_domain.test.domain_name
+  user_pool_id = aws_cognito_user_pool.test.id
+}
