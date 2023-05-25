@@ -28,8 +28,9 @@ resource "aws_cognito_user" "jane_doe" {
 }
 
 resource "aws_cognito_user_pool_client" "test" {
-  name         = var.resources_name
-  user_pool_id = aws_cognito_user_pool.test.id
+  name            = var.resources_name
+  generate_secret = true
+  user_pool_id    = aws_cognito_user_pool.test.id
 }
 
 resource "aws_cognito_user_group" "test" {
