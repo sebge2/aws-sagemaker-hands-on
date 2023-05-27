@@ -31,6 +31,15 @@ resource "aws_cognito_user_pool_client" "test" {
   name            = var.resources_name
   generate_secret = true
   user_pool_id    = aws_cognito_user_pool.test.id
+
+  explicit_auth_flows                  = ["ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_SRP_AUTH"]
+  allowed_oauth_flows_user_pool_client = true
+  supported_identity_providers         = ["COGNITO"]
+
+  allowed_oauth_flows = ["code", "implicit"]
+  allowed_oauth_scopes = ["email", "openid", "profile"]
+  id_token_validity = 1 # TODO check if necessary
+  callback_urls = [ "https://${aws_cognito_user_pool_domain.test.cloudfront_distribution_arn}"]
 }
 
 resource "aws_cognito_user_group" "test" {

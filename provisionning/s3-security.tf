@@ -30,7 +30,7 @@ resource "aws_iam_policy" "bucket_policy" {
       {
         "Effect" : "Allow",
         "Action": [
-          "s3:ListBucket"
+          "s3:*"
         ],
         "Resource" : [
           aws_s3_bucket.data.arn
@@ -39,10 +39,7 @@ resource "aws_iam_policy" "bucket_policy" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "s3:GetObject",
-          "s3:PutObject",
-          "s3:DeleteObject",
-          "s3:GetBucketLocation"
+          "s3:*"
         ],
         "Resource" : [
           "${aws_s3_bucket.data.arn}/*"
