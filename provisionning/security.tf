@@ -23,3 +23,7 @@ resource "aws_iam_policy_attachment" "sm_full_access_attach" {
   roles = [aws_iam_role.sm_iam_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
 }
+
+output "iam_role" {
+  value = aws_iam_role.sm_iam_role.arn
+}

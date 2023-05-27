@@ -4,10 +4,20 @@ resource "aws_s3_bucket" "data" {
   tags = var.tags
 }
 
-resource "aws_s3_object" "object" {
-  bucket = aws_s3_bucket.data.id
-  key    = "regression/Celsius_to_Fahrenheit.csv"
-  source = "examples/data/regression/Celsius_to_Fahrenheit.csv"
+resource "aws_s3_object" "regression" {
+  for_each = fileset("examples/data/regression", "*")
 
-  etag = filemd5("examples/data/regression/Celsius_to_Fahrenheit.csv")
+  bucket = aws_s3_bucket.data.id
+  key    = "data/regression/${each.value}"
+  source = "examples/data/regression/${each.value}"
+  etag   = filemd5("examples/data/regression/${each.value}")
+}
+
+resource "aws_s3_object" "military_planes" {
+  for_each = fileset("examples/data/labelling/military_planes", "*")
+
+  bucket = aws_s3_bucket.data.id
+  key    = "data/labelling/military_planes/${each.value}"
+  source = "examples/data/labelling/military_planes/${each.value}"
+  etag   = filemd5("examples/data/labelling/military_planes/${each.value}")
 }
