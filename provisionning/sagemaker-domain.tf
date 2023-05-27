@@ -10,6 +10,6 @@ resource "aws_sagemaker_domain" "test" {
 }
 
 output "domain_url" {
-  value       = "${aws_sagemaker_domain.test.url}"
+  value       = aws_sagemaker_domain.test.url
   description = "Domain URL"
 }
