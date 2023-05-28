@@ -17,7 +17,11 @@ resource "aws_sagemaker_workteam" "test" {
     cognito_member_definition {
       client_id  = aws_cognito_user_pool_client.test.id
       user_pool  = aws_cognito_user_pool_domain.test.user_pool_id
-      user_group = aws_cognito_user_group.test.id
+      user_group = aws_cognito_user_group.test.name
     }
   }
+}
+
+output "labelling_url" {
+  value = "https://${aws_sagemaker_workforce.test.subdomain}"
 }
