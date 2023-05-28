@@ -8,6 +8,6 @@ resource "aws_sagemaker_notebook_instance" "test" {
 }
 
 output "notebook_instance_url" {
-  value       = aws_sagemaker_notebook_instance.test.url
+  value       = "https://${aws_sagemaker_notebook_instance.test.url}"
   description = "Notebook Instance URL"
 }
