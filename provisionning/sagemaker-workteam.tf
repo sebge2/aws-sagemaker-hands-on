@@ -10,8 +10,8 @@ resource "aws_sagemaker_workforce" "test" {
 resource "aws_sagemaker_workteam" "test" {
   workteam_name  = var.resources_name
   workforce_name = aws_sagemaker_workforce.test.id
-  description = var.resources_name
-  tags = var.tags
+  description    = var.resources_name
+  tags           = var.tags
 
   member_definition {
     cognito_member_definition {
@@ -23,5 +23,6 @@ resource "aws_sagemaker_workteam" "test" {
 }
 
 output "labelling_url" {
-  value = "https://${aws_sagemaker_workforce.test.subdomain}"
+  value       = "https://${aws_sagemaker_workforce.test.subdomain}"
+  description = "URL for labelling jobs"
 }
