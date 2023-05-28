@@ -38,8 +38,12 @@ resource "aws_cognito_user_pool_client" "test" {
 
   allowed_oauth_flows = ["code", "implicit"]
   allowed_oauth_scopes = ["email", "openid", "profile"]
-  id_token_validity = 1 # TODO check if necessary
-  callback_urls = [ "https://${aws_cognito_user_pool_domain.test.cloudfront_distribution_arn}"]
+
+  lifecycle {
+    ignore_changes = [
+      callback_urls, logout_urls
+    ]
+  }
 }
 
 resource "aws_cognito_user_group" "test" {
