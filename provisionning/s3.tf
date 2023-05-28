@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "data" {
   bucket = "${data.aws_caller_identity.current.account_id}-${var.resources_name}-data"
+  force_destroy = true
 
   tags = var.tags
 }
