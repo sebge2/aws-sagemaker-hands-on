@@ -14,11 +14,20 @@ resource "aws_s3_object" "regression" {
   etag   = filemd5("examples/data/regression/${each.value}")
 }
 
-resource "aws_s3_object" "military_planes" {
+resource "aws_s3_object" "military_planes_labelling" {
   for_each = fileset("examples/data/labelling/military_planes", "*")
 
   bucket = aws_s3_bucket.data.id
   key    = "data/labelling/military_planes/${each.value}"
   source = "examples/data/labelling/military_planes/${each.value}"
   etag   = filemd5("examples/data/labelling/military_planes/${each.value}")
+}
+
+resource "aws_s3_object" "military_planes_examples" {
+  for_each = fileset("examples/data/examples/military_planes", "*")
+
+  bucket = aws_s3_bucket.data.id
+  key    = "data/examples/military_planes/${each.value}"
+  source = "examples/data/examples/military_planes/${each.value}"
+  etag   = filemd5("examples/data/examples/military_planes/${each.value}")
 }
